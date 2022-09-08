@@ -1,0 +1,93 @@
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Тестовый пользователь1",
+  "about": "Информация о себе",
+  "avatar": "https://trueposters.ru/pictures/product/big/8210_big.jpg"
+}
+
+###
+
+POST  http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "country": "Тестовая карточка55",
+  "director": "Тестовая карточка55",
+  "duration": "12",
+  "year": "Тестовая карточка55",
+  "description": "Тестовая карточка55",
+  "image": "https://trueposters.ru/pictures/product/big/8210_big.jpg",
+  "trailerLink": "https://trueposters.ru/pictures/product/big/8210_big.jpg",
+  "nameRU": "Тестовая карточка55",
+  "nameEN": "Тестовая карточка55",
+  "thumbnail": "https://trueposters.ru/pictures/product/big/8210_big.jpg",
+  "movieId": "12345678",
+  "owner": "631a2edc3fad87860d0f0af6"
+}
+
+###
+
+GET http://localhost:3000/cards
+
+###
+
+GET http://localhost:3000/users/me
+
+###
+
+GET http://localhost:3000/users/62def0a742948ec662500c51
+
+###
+
+PATCH  http://localhost:3000/users/me
+Content-Type: application/json
+
+{
+  "name": "Тестовый пользователь3",
+  "about": "Информация о себе"
+}
+
+###
+
+PATCH  http://localhost:3000/users/me/avatar
+Content-Type: application/json
+
+{
+  "avatar": "https://yandex.ru/images/search?utm_source=main_stripe_big&text=Северный%20Олень&nl=1&source=morda"
+}
+
+###
+
+DELETE  http://localhost:3000/cards/62e19c1256b7f4eba47faf37
+
+###
+
+DELETE  http://localhost:3000/cards/62e19d3743cb848c2b96aba7/likes
+
+###
+
+PUT http://localhost:3000/cards/62e19d3743cb848c2b96aba7/likes
+
+###
+POST http://localhost:3000/signin
+Content-Type: application/json
+
+{
+  "email": "12345678@mail.ru",
+  "password": "12345678"
+}
+
+###
+GET  http://mesto.nn.nomoredomains.sbs/api/signup
+
+{
+
+}
+
+###
+
+GET http://mesto.nn.nomoredomains.sbs/crash-test
+
+
