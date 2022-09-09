@@ -10,10 +10,10 @@ const movieRoutes = express.Router();
 
 movieRoutes.get('/', getMovies);
 movieRoutes.delete(
-  '/:_id',
+  '/:id',
   celebrate({
     params: Joi.object().keys({
-      _id: Joi.string().required().length(24).hex(),
+      id: Joi.string().required().length(24).hex(),
     }),
   }),
   deleteMovie,

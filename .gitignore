@@ -14,5 +14,3 @@ node_modules
 .idea
 .vscode
 
-#ignor files
-.env
