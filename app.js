@@ -2,45 +2,22 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { celebrate, Joi, errors } = require('celebrate');
+const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { userRoutes } = require('./routes/users');
 const { movieRoutes } = require('./routes/movie');
-const {
-  login,
-  createUser,
-} = require('./controllers/users');
+const { loginRoutes } = require('./routes/login');
 const { auth } = require('./middlewares/auth');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DATABASE_URL } = process.env;
 const app = express();
 app.use(express.json());
 app.use(requestLogger);
 app.use(cors());
-app.post(
-  '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-    }),
-  }),
-  login,
-);
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-      name: Joi.string().min(2).max(30),
-    }),
-  }),
-  createUser,
-);
+app.use(loginRoutes);
 app.use(auth);
-app.use('/users', userRoutes);
-app.use('/movies', movieRoutes);
+app.use(userRoutes);
+app.use(movieRoutes);
 app.use('/*', (req, res, next) => {
   const err = new Error('Указан неверный путь');
   err.statusCode = 404;
@@ -60,7 +37,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb').then(() => {
+mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : 'mongodb://localhost:27017/bitfilmsdb').then(() => {
   console.log('Connected to database on mongodb://127.0.0.1:27017/bitfilmsdb');
 });
 

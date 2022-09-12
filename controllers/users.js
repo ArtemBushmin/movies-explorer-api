@@ -56,6 +56,11 @@ module.exports.updateUserProfile = (req, res, next) => {
         const err = new Error('Некорректные данные при обновлении пользователя');
         err.statusCode = 400;
         next(err);
+      }
+      if (error.code === 11000) {
+        const err = new Error('Пользователь с таким email уже существует');
+        err.statusCode = 409;
+        next(err);
       } else {
         next(error);
       }

@@ -7,7 +7,7 @@ module.exports.auth = (req, res, next) => {
   if (!authorization || !authorization.startsWith('Bearer ')) {
     const err = new Error('Необходима авторизация');
     err.statusCode = 401;
-    next(err);
+    return next(err);
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -17,7 +17,7 @@ module.exports.auth = (req, res, next) => {
   } catch (error) {
     const err = new Error('Необходима авторизация');
     err.statusCode = 401;
-    next(err);
+    return next(err);
   }
 
   req.user = payload;

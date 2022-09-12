@@ -7,9 +7,9 @@ const {
 
 const userRoutes = express.Router();
 
-userRoutes.get('/me', getUserInfo);
+userRoutes.get('/users/me', getUserInfo);
 userRoutes.patch(
-  '/me',
+  '/users/me',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),

@@ -8,9 +8,9 @@ const {
 
 const movieRoutes = express.Router();
 
-movieRoutes.get('/', getMovies);
+movieRoutes.get('/movies/', getMovies);
 movieRoutes.delete(
-  '/:id',
+  '/movies/:id',
   celebrate({
     params: Joi.object().keys({
       id: Joi.string().required().length(24).hex(),
@@ -19,7 +19,7 @@ movieRoutes.delete(
   deleteMovie,
 );
 movieRoutes.post(
-  '/',
+  '/movies/',
   celebrate({
     body: Joi.object().keys({
       country: Joi.string().required(),
